@@ -1,0 +1,2 @@
+class ServerConnection:
+    pass

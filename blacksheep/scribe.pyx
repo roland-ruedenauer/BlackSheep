@@ -185,6 +185,10 @@ cpdef bytes py_write_small_request(Request request):
     return write_small_request(request)
 
 
+cpdef bint py_is_small_response(Response response):
+    return is_small_response(response)
+
+
 async def write_request_body_only(Request request):
     # This method is used only for Expect: 100-continue scenario;
     # in such case the request headers are sent before and then the body
