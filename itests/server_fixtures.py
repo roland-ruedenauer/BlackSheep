@@ -83,6 +83,14 @@ def _start_server(target_app, port: int, init_callback=None):
         config.bind = [f"localhost:{port}"]
         config.loglevel = "DEBUG"
         asyncio.run(hypercorn_serve(target_app, config))
+    elif server_type == "daphne":
+        from daphne.server import Server
+
+        server = Server(
+            application=app,
+            endpoints=["tcp:port=%d:interface=%s" % (int(port), "localhost")],
+        )
+        server.run()
     else:
         raise ValueError(f"unsupported server type {server_type}")
 

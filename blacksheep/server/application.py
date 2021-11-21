@@ -652,6 +652,9 @@ class Application(BaseApplication):
         await send({"type": "lifespan.shutdown.complete"})
 
     async def __call__(self, scope, receive, send):
+        if not self.started:
+            await self.start()
+
         if scope["type"] == "lifespan":
             return await self._handle_lifespan(receive, send)
 
